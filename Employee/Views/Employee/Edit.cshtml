@@ -1,0 +1,76 @@
+﻿@model Employee.Models.EmplVM
+
+@{
+    ViewData["Title"] = "Edit Employee";
+}
+
+<h1>Edit Details</h1>
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-controller="Employee" asp-action="Edit" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="EmpVm.id" hidden class="control-label"></label>
+                <input asp-for="EmpVm.id" readonly hidden class="form-control" />
+                <span asp-validation-for="EmpVm.id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EmpVm.name" class="control-label"></label>
+                <input asp-for="EmpVm.name" class="form-control" />
+                <span asp-validation-for="EmpVm.name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EmpVm.gender" class="control-label"></label>
+                <select asp-for="EmpVm.gender" class="form-control">
+                    <option disabled selected> -- Gender --</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                </select>
+                <span asp-validation-for="EmpVm.gender" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EmpVm.city" class="control-label"></label>
+                <input asp-for="EmpVm.city" class="form-control" />
+                <span asp-validation-for="EmpVm.city" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EmpVm.mobile" class="control-label"></label>
+                <input asp-for="EmpVm.mobile" class="form-control" />
+                <span asp-validation-for="EmpVm.mobile" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EmpVm.salary" class="control-label"></label>
+                <input asp-for="EmpVm.salary" class="form-control" />
+                <span asp-validation-for="EmpVm.salary" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EmpVm.departmentId" class="control-label"></label>
+                <select asp-for="EmpVm.departmentId" class="form-control">
+					<option disabled selected> -- Department --</option>
+                    <option>
+						@foreach (var dept in Model.deptVM)
+						{
+						<option value="@dept.id">@dept.name</option>
+						}
+                    </option>
+                </select>
+                <span asp-validation-for="EmpVm" class="text-danger"></span>
+            </div>
+            <div class="row">
+            <div class="form-group mt-2 col-6">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+            <div class="col-6 text-end mt-2">
+                    <a asp-controller="Employee" asp-action="Index" class=" btn btn-secondary">Back to List</a>
+            </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
